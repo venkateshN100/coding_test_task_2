@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Slider</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url(images/bg-image.jpg);
+            background-size:cover;
+            background-repeat: no-repeat;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            text-align: center;
+        }
+
+        .header {
+            color: #333;
+        }
+
+        .slider-container {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slider {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slider li {
+            width: 100%;
+            flex: 0 0 auto;
+        }
+
+        .slider img {
+            width: 100%;
+            height: auto;
+            height:500px;
+        }
+
+        .slider-control {
+            margin-top:2px;
+
+        }
+
+        .footer {
+            margin-top: 20px;
+            color: #777;
+        }
+        #prevBtn {
+           padding-right:300px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="header">Pet Slider</h1>
+        <div class="slider-container">
+            <ul class="slider">
+                <li><img src="images/slider-image-1.jpg" alt="Image 1"></li>
+                <li><img src="images/slider-image-2.jpg" alt="Image 2"></li>
+                <li><img src="images/slider-image-3.jpg" alt="Image 3"></li>
+                <li><img src="images/slider-image-4.jpg" alt="Image 4"></li>
+                <li><img src="images/image-5.jpg" alt="Image 5"></li>
+                <li><img src="images/image-6.jpg" alt="Image 6"></li>
+                <li><img></li>
+                <li><img></li>
+            </ul>
+        </div>
+        <div class="slider-control">
+            <img src="images/left.png" alt="Previous" width= 150px id ="prevBtn">
+            <img src="images/right.png" alt="Next" width = 150px id="nextBtn">
+        </div>
+        <footer class="footer">Created by Venkatesh</footer>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const slider = document.querySelector('.slider');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+
+            let currentIndex = 0;
+
+            function showSlide(index) {
+                const newTransformValue = -index * 100 + '%';
+                slider.style.transform = 'translateX(' + newTransformValue + ')';
+            }
+
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % (slider.children.length - 2); // Subtract 2 for better edge handling
+                showSlide(currentIndex);
+            }
+
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + (slider.children.length - 2)) % (slider.children.length - 2);
+                showSlide(currentIndex);
+            }
+
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+        });
+    </script>
+</body>
+</html>
